@@ -28,6 +28,8 @@ public class UserRepository {
             session.getTransaction().commit();
         } catch (Exception e) {
             session.getTransaction().rollback();
+        } finally {
+            session.close();
         }
         return user;
     }
@@ -51,6 +53,8 @@ public class UserRepository {
             if (session.getTransaction().isActive()) {
                 session.getTransaction().rollback();
             }
+        } finally {
+            session.close();
         }
     }
 
@@ -71,6 +75,8 @@ public class UserRepository {
             if (session.getTransaction().isActive()) {
                 session.getTransaction().rollback();
             }
+        } finally {
+            session.close();
         }
     }
 
@@ -79,7 +85,16 @@ public class UserRepository {
      * @return список пользователей.
      */
     public List<User> findAllOrderById() {
-        return List.of();
+        try (Session session = sf.openSession()) {
+            session.beginTransaction();
+            List<User> result = session.createSelectionQuery("from User order by id", User.class)
+                            .getResultList();
+            session.getTransaction().commit();
+            return result;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return List.of();
+        }
     }
 
     /**
