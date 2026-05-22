@@ -1,0 +1,24 @@
+package ru.job4j.cars.model;
+
+import jakarta.persistence.*;
+import lombok.Data;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
+@Data
+@Table(name = "auto_post")
+public class Post {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    private String description;
+    private LocalDateTime created;
+    private String autoUserId;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "before")
+    private List<PriceHistory> prices = new ArrayList<>();
+}
