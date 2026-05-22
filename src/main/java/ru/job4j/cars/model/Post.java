@@ -19,6 +19,6 @@ public class Post {
     private String autoUserId;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "before")
+    @JoinColumn(name = "auto_post_id")
     private List<PriceHistory> prices = new ArrayList<>();
 }
