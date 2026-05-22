@@ -9,5 +9,5 @@
     <include file="script/003_dml_update_auto_user_table.sql" relativeToChangelogFile="true"/>
     <include file="script/004_ddl_add_table_price_history.sql" relativeToChangelogFile="true"/>
     <include file="script/005_ddl_alter_table_price_history.sql" relativeToChangelogFile="true"/>
-
+    <include file="script/006_ddl_create_participates_table.sql" relativeToChangelogFile="true"/>
 </databaseChangeLog>
